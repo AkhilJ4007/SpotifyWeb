@@ -1,0 +1,33 @@
+.sidebarOption{
+    color:grey;
+    padding-left: 20px;
+    cursor: pointer;
+    transition: 200ms color ease-in;
+    display: flex;
+    align-items: center;
+}
+
+.sidebarOption:hover{
+    color: white;
+}
+
+.sidebarOption > h4{
+    height: 40px;
+} 
+
+.sidebarOption > h4:before {
+    content: "";
+    display: inline-block;
+    height: 100%;
+    vertical-align: middle;
+}
+.sidebarOption > p{
+    margin-top: 5px;
+    font-size: 14px;
+    height: 30px;
+    display: block;
+}
+
+.titleName{
+    padding-left: 15px;
+}
