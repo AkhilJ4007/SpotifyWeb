@@ -1,6 +1,6 @@
 @import url('https://fonts.googleapis.com/css2?family=Kumbh+Sans&display=swap');
 
-img{
+.login > img{
     max-width: 300px;
     max-height: 300px;
     min-width: 200px;

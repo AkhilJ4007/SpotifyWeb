@@ -2,7 +2,90 @@
     position: fixed;
     bottom: 0;
     width: 100%;
-    padding: 20px;
+    padding: 20px 0px;
     height: 65px;
+    display: flex;
     background-color: #282828;
 }
+
+.footer > div{
+    padding: 5px 10px;
+}
+
+.footer_left{
+    flex: 0.3;
+    display: flex;
+}
+.footer_left > img{
+
+    flex: 0.3;
+    background-color: greenyellow;
+    padding-top: 0;
+    max-width: 60px;
+    min-width: 30px;
+    max-height: 60px;
+    min-height: 30px;
+
+}
+
+
+
+.footer_left > div{
+
+    flex: 0.7;
+    
+
+}
+
+.footer_left > div > p{
+    padding-left: 10px;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    color: white;
+    font-size: 12px;
+}
+
+.footer_left > div > p > strong{
+    font-size: 15px;
+}
+
+
+.footer_center{
+    flex: 0.4;
+}
+
+.buttons{
+    margin-left: auto;
+    margin-right: auto;
+    width: fit-content;
+}
+
+.buttons > svg {
+    color:rgb(120,120,120);
+    margin: 0px 20px;
+    transition:  fill 2s;
+}
+
+.buttons > svg :hover{
+    color: white;
+}
+
+
+
+.footer_right{
+    flex: 0.3;
+    display: flex;
+}
+
+.footer_right> svg{
+    flex: 0.3;
+    margin-left: 70px;
+    color: rgb(120,120,120);;
+}
+
+.volume{
+    flex: 0.7;
+    margin-right: 80px;
+}
+
+

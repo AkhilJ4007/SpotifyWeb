@@ -5,7 +5,7 @@ const redirectUri = "http://localhost:3000/";
 const clientID = "67af5f779ce140bda5a7a5646ecbf3a2"
 
 const scopes = ["user-read-playback-state","user-modify-playback-state","user-library-read","user-read-currently-playing","user-read-recently-played",
-                "user-top-read"]
+                "user-top-read","playlist-read-private"]
 
 export const loginUrl = `${authEndpoint}?client_id=${clientID}&redirect_uri=${redirectUri}&scope=${scopes.join("%20")}&response_type=token&show_dialog=true`;
 
