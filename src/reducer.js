@@ -3,13 +3,24 @@ export const initialState = {
     playlists : [],
     playing : false,
     item : null,
+    spotify: null,
+    playlistSongs: null,
     // remove after done developing
-    token: "BQB-qzF9mWUPZQLJiY2bi5GJsbJzxL6qs8AzvZhunVeXNElC7Ik8NTZZAZGK2MeYrC9tuFT9xY_liC4QGvxmGwAxvJljMyB6XGIlzLpr3N-GF85LXrLzMGyFCiDPaF6Kufg3ea6j9yjbb5BoZVLZexg_SsccVhxNvWDEqPtJU7dmNvecNomJ8KU3"
+    token: "",
+    selectedPlaylist: null,
+    selectedSong: null
 };
 
 const reducer = (state, action) => {
     console.log(action)
     switch(action.type){
+
+        case 'SET_API':
+            return({
+                ...state,
+                spotify : action.spotify
+            })
+
         case 'SET_USER': 
         return(
             {
@@ -25,6 +36,25 @@ const reducer = (state, action) => {
                 token : action.token
             }
         )
+
+        case 'SET_PLAYLISTS':
+            return({
+                ...state,
+                playlists: action.playlists
+            })
+        
+        case 'SET_PLAYLIST_ID':
+            return({
+                ...state,
+                selectedPlaylist: action.selectedPlaylist
+            })
+
+        case 'SET_SONG':
+            return({
+                ...state,
+                selectedSong : action.selectedSong
+            })
+        
 
         default : return state
 

@@ -13,6 +13,9 @@ function App() {
   const [{token},dispatch] = useDataLayerValue()
 
   useEffect(() => {
+    
+  
+
     const hash = getTokenFromUrl()
     window.location.hash = ""
     const _token = hash.access_token
@@ -22,6 +25,12 @@ function App() {
         token: _token
       })
       spotify.setAccessToken(_token)
+
+      dispatch({
+        type: "SET_API",
+        spotify: spotify
+    })
+      
       spotify.getMe().then((user)=>{
         console.log("Userrr",user)
         dispatch({
@@ -29,6 +38,35 @@ function App() {
           user: user
         })
       })
+
+      
+
+      spotify.getUserPlaylists().then( (playlist) => {
+
+        dispatch({
+          type: "SET_PLAYLISTS",
+          playlists: playlist
+        })
+
+      }
+
+      )
+
+
+      // spotify.searchPlaylists("Discover Weekly").then((playlist) => {
+      //   if(playlist != null){
+      //     console.log(playlist)
+      //     return playlist
+      //   }
+      // }).then((playlist) => {
+
+      //   console.log(playlist.playlists.items[0].id)
+
+      //   spotify.getPlaylistTracks(playlist?.playlists.items[0]?.id).then((songs,err) => {
+      //     console.log(songs)
+      //   })
+      // })
+
     }
 
   }, [])

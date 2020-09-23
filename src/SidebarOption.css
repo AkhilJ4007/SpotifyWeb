@@ -1,15 +1,17 @@
 .sidebarOption{
-    color:grey;
     padding-left: 20px;
     cursor: pointer;
+    padding-bottom: 10px;
     transition: 200ms color ease-in;
     display: flex;
     align-items: center;
 }
 
 .sidebarOption:hover{
-    color: white;
+    color: white !important;
 }
+
+
 
 .sidebarOption > h4{
     height: 40px;
@@ -22,9 +24,9 @@
     vertical-align: middle;
 }
 .sidebarOption > p{
-    margin-top: 5px;
+    margin-top: 10px;
     font-size: 14px;
-    height: 30px;
+    min-height: 20px;
     display: block;
 }
 

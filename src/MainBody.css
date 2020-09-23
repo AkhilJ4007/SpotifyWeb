@@ -1,5 +1,106 @@
 .mainBody{
     flex: 0.8;
-    height: 100vh;
+    height: calc(100vh - 85px);
     background: linear-gradient(rgb(91, 87, 115),rgb(0,0,0));
+    overflow-y: scroll;
 }
+
+
+
+.main_top_bar{
+    position: sticky;
+    top: 0;
+    height: 60px;
+
+}
+
+.profile{
+    border: 1px solid black;
+    border-radius: 5px;
+    width: fit-content;
+    min-width: 100px;
+    padding: 5px;
+    transform: translate(calc((100vw*8)/10 - 100% - 20px),5px);
+}
+
+.profile > img{
+
+    max-width: 50px;
+    max-height: 50px;
+
+}
+
+.profile > span{
+    margin-left: 10px;
+}
+
+@media screen and (max-width: 1100px){
+
+    .profile{
+        transform: translate(calc(100vw - 230px - 100% - 15px),5px);
+    }
+}
+
+.topBar{
+    display: flex;
+    align-items: center;
+    height: 250px;
+}
+
+.topBar > img {
+    width: 200px;
+    height: 200px;
+    max-width: 200px;
+    max-height: 200px;
+    margin-left: 20px;
+    flex: 0.3;
+}
+
+.topBar > div{
+    flex: 0.7;
+    margin-left: 20px;
+    color: #E4E2E0;
+}
+
+.topBar > div >h1 {
+
+    font-size: calc(100vw * 0.03);
+    max-height: 180px;
+    max-width: 460px;
+    overflow: hidden;
+
+}
+
+.topBar > div > p{
+    font-size: 15px;
+    max-width: 400px;
+}
+
+.mainContent{
+    margin: 10px 15px 0px 15px;
+}
+
+.playBar> svg{
+    margin-left: 20px;
+    font-size: 70px;
+    color: #1DB954;
+}
+
+.songHeader{
+    display: flex;
+    margin: 10px 20px 10px 20px;
+    color: rgba(228,226,224, 0.5);
+    padding-bottom: 10px;
+    font-size: 13px;
+    border-bottom: 1px solid rgba(228,226,224, 0.2)
+}
+
+.songHeader > p {
+    margin: auto;
+}
+.mainContent{
+    margin: 0px 20px;
+}
+
+
+
