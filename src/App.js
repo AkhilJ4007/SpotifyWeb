@@ -30,16 +30,14 @@ function App() {
         type: "SET_API",
         spotify: spotify
     })
+
       
       spotify.getMe().then((user)=>{
-        console.log("Userrr",user)
         dispatch({
           type: "SET_USER",
           user: user
         })
       })
-
-      
 
       spotify.getUserPlaylists().then( (playlist) => {
 
@@ -52,20 +50,7 @@ function App() {
 
       )
 
-
-      // spotify.searchPlaylists("Discover Weekly").then((playlist) => {
-      //   if(playlist != null){
-      //     console.log(playlist)
-      //     return playlist
-      //   }
-      // }).then((playlist) => {
-
-      //   console.log(playlist.playlists.items[0].id)
-
-      //   spotify.getPlaylistTracks(playlist?.playlists.items[0]?.id).then((songs,err) => {
-      //     console.log(songs)
-      //   })
-      // })
+      
 
     }
 
