@@ -4,7 +4,7 @@ import {useDataLayerValue} from './DataLayer'
 
 function SidebarOption({option, Icon, id}) {
 
-    const [{selectedPlaylist},dispatch] = useDataLayerValue()
+    const [{selectedPlaylist_ID},dispatch] = useDataLayerValue()
 
     const [color,setColor] = useState("grey")
 
@@ -13,20 +13,20 @@ function SidebarOption({option, Icon, id}) {
 
         dispatch({
             type: "SET_PLAYLIST_ID",
-            selectedPlaylist : id
+            selectedPlaylist_ID : id
         })
     }
 
     useEffect(() => {
 
-        if(selectedPlaylist === id){
+        if(selectedPlaylist_ID === id){
             setColor("white")
         }
         else{
             setColor("grey")
         }
 
-    }, [selectedPlaylist])
+    }, [selectedPlaylist_ID])
 
     return (
         <div className = "sidebarOption" style = {{color:color}} onClick = {sidebarClicked}>

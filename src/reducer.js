@@ -8,7 +8,14 @@ export const initialState = {
     // remove after done developing
     token: "",
     selectedPlaylist: null,
-    selectedSong: null
+    selectedSong: null,
+    device_id: null,
+    currentPlaylist: null,
+    selectedPlaylist_ID: null,
+    position: null,
+    paused_details: null
+
+
 };
 
 const reducer = (state, action) => {
@@ -46,7 +53,7 @@ const reducer = (state, action) => {
         case 'SET_PLAYLIST_ID':
             return({
                 ...state,
-                selectedPlaylist: action.selectedPlaylist
+                selectedPlaylist_ID: action.selectedPlaylist_ID
             })
 
         case 'SET_SONG':
@@ -54,6 +61,36 @@ const reducer = (state, action) => {
                 ...state,
                 selectedSong : action.selectedSong
             })
+
+        case 'SET_DEVICE_ID':
+            return({
+                    ...state,
+                    device_id : action.device_id
+            })
+
+        case 'SET_CURRENT_PLAYLIST':
+            return(
+                {
+                    ...state,
+                    currentPlaylist : action.currentPlaylist
+                }
+            )
+
+        case 'SET_SONG_POSITION':
+            {
+                return({
+                    ...state,
+                    position: action.position
+                })
+            }
+    
+            case 'SET_PAUSED_DETAILS':
+                {
+                    return({
+                        ...state,
+                        paused_details: action.paused_details
+                    })
+                }
         
 
         default : return state

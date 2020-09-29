@@ -3,10 +3,12 @@ import "./MainBody.css"
 import MusicListItem from "./MusicListItem"
 import PlayCircleFilledWhiteIcon from '@material-ui/icons/PlayCircleFilledWhite';
 import {useDataLayerValue} from './DataLayer'
+import Script from 'react-load-script'
+import {onSpotifyWebPlaybackSDKReady} from './playerInitialization'
 
 function MainBody() {
 
-    const [{spotify,user,selectedPlaylist},dispatch] = useDataLayerValue()
+    const [{spotify,user,selectedPlaylist_ID,selectedSong,token},dispatch] = useDataLayerValue()
 
 
 
@@ -16,22 +18,25 @@ function MainBody() {
 
     const [ songsList , setsongList] = useState(null);
 
+    const [ songCheck, setSongCheck] = useState(null);
+
+    const [deviceID, setID] = useState(null);
+
 
 
     useEffect(() => {
         if(spotify){
 
-        spotify.searchPlaylists("Discover Weekly").then((playlist) => {
+        spotify.searchPlaylists("Discover Weekly").then((playlist, err) => {
             if(playlist != null){
-            return playlist
+    
+                setCurrentPlaylist(playlist.playlists.items[0])
+    
+                spotify.getPlaylistTracks(playlist?.playlists.items[0]?.id).then((songs,err) => {
+                    setsongList(songs.items)
+                })
             }
-        }).then((playlist) => {
-    
-            setCurrentPlaylist(playlist.playlists.items[0])
-    
-            spotify.getPlaylistTracks(playlist?.playlists.items[0]?.id).then((songs,err) => {
-                setsongList(songs.items)
-            })
+
         })
     }
 
@@ -42,19 +47,30 @@ function MainBody() {
     }, [spotify])
 
 
+    useEffect(() => {
+
+        if(currentPlaylist) {
+        dispatch({
+            type: "SET_CURRENT_PLAYLIST",
+            currentPlaylist : currentPlaylist
+        })
+    }
+    }, [currentPlaylist])
+
+
 
     useEffect(() => {
 
-        if(spotify && selectedPlaylist){
+        if(spotify && selectedPlaylist_ID){
             
-            spotify.getPlaylist(selectedPlaylist).then((songs)=>{
+            spotify.getPlaylist(selectedPlaylist_ID).then((songs)=>{
                 console.log(songs)
                 setCurrentPlaylist(songs)
                 setsongList(songs.tracks.items)
             })
         }
 
-    },[spotify,selectedPlaylist])
+    },[spotify,selectedPlaylist_ID])
 
 
     useEffect(()=>{
@@ -68,6 +84,63 @@ function MainBody() {
 
     },[songsList])
 
+
+    const onDeviceIDReady = (id) => {
+
+        dispatch({
+            type : "SET_DEVICE_ID",
+            device_id : id
+        })
+
+    }
+
+
+    const playerPaused =  (details) => {
+
+        dispatch({
+            type:"SET_PAUSED_DETAILS",
+            paused_details: details
+        })
+
+    }
+
+    useEffect(() => {
+
+        console.log("THIs song " + JSON.stringify(selectedSong))
+
+    },[selectedSong])
+
+    const nextSong = (song) => {
+
+        setSongCheck(song)
+    }
+
+
+    useEffect(() => {
+
+        if(songCheck && selectedSong){
+
+            if(songCheck?.uri !== selectedSong.uri){
+
+                dispatch({
+                    type:"SET_SONG",
+                    selectedSong : songCheck
+                })
+
+            }
+
+
+        }
+
+
+
+    },[songCheck])
+
+
+    const setSDK = () => {
+        window.onSpotifyWebPlaybackSDKReady = onSpotifyWebPlaybackSDKReady({token:token,onDeviceIDReady:onDeviceIDReady,playerPaused:playerPaused,thisSong:selectedSong?.uri,nextSong:nextSong})
+        
+    }
 
 
 
@@ -83,9 +156,7 @@ function MainBody() {
 
             <div className = "topBar">
 
-                <img src = {currentPlaylist?.images[0].url} alt = "no image"/>
-
-
+                <img src = {currentPlaylist?.images[0]?.url} alt = "no image"/>
                 <div>
 
                     <h4>Playlist</h4>
@@ -118,7 +189,12 @@ function MainBody() {
                     songItems
                 }
             </div>
+            {
+                setSDK()
+            }
+            <Script url = "https://sdk.scdn.co/spotify-player.js"/>
         </div>
+        
     )
 }
 
